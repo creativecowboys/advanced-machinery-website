@@ -45,8 +45,8 @@ function ChatProductCard({ product, onAddToCart }: { product: Product; key?: str
             <button
                 onClick={() => onAddToCart(product.id)}
                 className={`shrink-0 w-8 h-8 flex items-center justify-center transition-all ${inCart
-                        ? 'bg-green-500 text-white'
-                        : 'bg-[#1A2947] text-white hover:bg-[#1E73C8]'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-[#1A2947] text-white hover:bg-[#1E73C8]'
                     }`}
                 title={inCart ? 'In cart' : 'Add to cart'}
             >
@@ -227,7 +227,7 @@ const AIChat = forwardRef<AIChatHandle>(function AIChat(_props, ref) {
 
     return (
         <>
-            {/* Floating Button */}
+            {/* Floating Button — hidden on mobile (hero chat is primary) */}
             <AnimatePresence>
                 {!open && (
                     <motion.button
@@ -236,7 +236,7 @@ const AIChat = forwardRef<AIChatHandle>(function AIChat(_props, ref) {
                         exit={{ scale: 0, opacity: 0 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                         onClick={() => setOpen(true)}
-                        className="fixed bottom-6 right-6 z-50 bg-[#1A2947] text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:bg-[#1E73C8] transition-colors group"
+                        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#1A2947] text-white w-16 h-16 rounded-full shadow-2xl items-center justify-center hover:bg-[#1E73C8] transition-colors group"
                         aria-label="Open AI product search"
                     >
                         <div className="relative">
@@ -255,7 +255,7 @@ const AIChat = forwardRef<AIChatHandle>(function AIChat(_props, ref) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 40, scale: 0.95 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-                        className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] flex flex-col bg-white shadow-2xl border border-[#E0E0E0]"
+                        className="hidden md:flex fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] flex-col bg-white shadow-2xl border border-[#E0E0E0]"
                         style={{ height: 'min(640px, calc(100vh - 100px))' }}
                     >
                         {/* Header */}

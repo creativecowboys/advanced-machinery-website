@@ -56,27 +56,32 @@ export default function CategoryPage({ category, onBack }: CategoryPageProps) {
 
             {/* Filters Bar */}
             <div className="bg-[#F7F7F7] border-b border-[#E0E0E0] sticky top-0 z-30 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row gap-4 items-center justify-between">
-                    {/* Search */}
-                    <div className="relative w-full sm:max-w-xs">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999]" size={16} />
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-9 pr-4 py-2.5 text-sm border border-[#E0E0E0] bg-white focus:outline-none focus:ring-2 focus:ring-[#1E73C8] font-medium"
-                        />
+                <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex flex-col gap-3">
+                    {/* Top row: search + count */}
+                    <div className="flex items-center gap-3">
+                        <div className="relative flex-1 sm:max-w-xs">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999]" size={16} />
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full pl-9 pr-4 py-2.5 text-sm border border-[#E0E0E0] bg-white focus:outline-none focus:ring-2 focus:ring-[#1E73C8] font-medium"
+                            />
+                        </div>
+                        <span className="text-xs font-bold text-[#999] uppercase tracking-wide shrink-0">
+                            {filtered.length} {filtered.length !== 1 ? 'products' : 'product'}
+                        </span>
                     </div>
 
-                    {/* Subcategory Pills */}
-                    <div className="flex items-center gap-2 flex-wrap">
+                    {/* Subcategory Pills — horizontal scroll on mobile */}
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
                         <SlidersHorizontal size={14} className="text-[#999] shrink-0" />
                         {['All', ...category.subcategories].map((sub) => (
                             <button
                                 key={sub}
                                 onClick={() => setActiveSubcat(sub)}
-                                className={`text-[11px] font-black uppercase tracking-wide px-3 py-1.5 border transition-colors ${activeSubcat === sub
+                                className={`text-[11px] font-black uppercase tracking-wide px-3 py-1.5 border transition-colors shrink-0 ${activeSubcat === sub
                                     ? 'bg-[#1A2947] text-white border-[#1A2947]'
                                     : 'bg-white text-[#555] border-[#E0E0E0] hover:border-[#1A2947] hover:text-[#1A2947]'
                                     }`}
@@ -85,11 +90,6 @@ export default function CategoryPage({ category, onBack }: CategoryPageProps) {
                             </button>
                         ))}
                     </div>
-
-                    {/* Count */}
-                    <span className="text-xs font-bold text-[#999] uppercase tracking-wide shrink-0">
-                        {filtered.length} product{filtered.length !== 1 ? 's' : ''}
-                    </span>
                 </div>
             </div>
 
