@@ -89,7 +89,7 @@ export async function sendMessage(
     }));
 
     const chat = client.chats.create({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         config: {
             systemInstruction: SYSTEM_PROMPT,
         },
