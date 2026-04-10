@@ -275,7 +275,7 @@ export default function HeroChat({ initialQuery, onQueryConsumed }: HeroChatProp
                             initial={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="flex items-center gap-2 mt-4 overflow-x-auto scrollbar-none justify-center sm:justify-center"
+                            className="flex items-center gap-2 mt-4 overflow-x-auto scrollbar-none px-1"
                         >
                             {PILLS.map(pill => (
                                 <button
