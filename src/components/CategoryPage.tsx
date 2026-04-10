@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Search, SlidersHorizontal } from 'lucide-react';
+import { ArrowLeft, Search, SlidersHorizontal, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { Category } from '../data/products';
 import ProductCard from './ProductCard';
@@ -12,6 +12,7 @@ interface CategoryPageProps {
 export default function CategoryPage({ category, onBack }: CategoryPageProps) {
     const [search, setSearch] = useState('');
     const [activeSubcat, setActiveSubcat] = useState('All');
+    const [filtersOpen, setFiltersOpen] = useState(false);
 
     const filtered = category.products.filter((p) => {
         const matchesSearch =
@@ -47,7 +48,7 @@ export default function CategoryPage({ category, onBack }: CategoryPageProps) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-4">
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-4">
                             {category.name}
                         </h1>
                         <div className="h-1 w-16 bg-[#2E6DB4] mb-6" />
@@ -60,10 +61,10 @@ export default function CategoryPage({ category, onBack }: CategoryPageProps) {
 
             {/* Filters Bar */}
             <div className="bg-[#F7F7F7] border-b border-[#E0E0E0] sticky top-0 z-30 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex flex-col gap-3">
-                    {/* Top row: search + count */}
-                    <div className="flex items-center gap-3">
-                        <div className="relative flex-1 sm:max-w-xs">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 py-3">
+                    {/* Single row: search + filter toggle + count */}
+                    <div className="flex items-center gap-2">
+                        <div className="relative flex-1">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#999]" size={16} />
                             <input
                                 type="text"
@@ -73,27 +74,40 @@ export default function CategoryPage({ category, onBack }: CategoryPageProps) {
                                 className="w-full pl-9 pr-4 py-2.5 text-sm border border-[#E0E0E0] bg-white focus:outline-none focus:ring-2 focus:ring-[#2E6DB4] font-medium"
                             />
                         </div>
+                        <button
+                            onClick={() => setFiltersOpen(o => !o)}
+                            className={`flex items-center gap-1.5 px-3 py-2.5 border text-xs font-black uppercase tracking-wide transition-colors shrink-0 ${
+                                filtersOpen || activeSubcat !== 'All'
+                                    ? 'bg-[#1A2B4A] text-white border-[#1A2B4A]'
+                                    : 'bg-white text-[#555] border-[#E0E0E0] hover:border-[#1A2B4A] hover:text-[#1A2B4A]'
+                            }`}
+                        >
+                            {filtersOpen ? <X size={13} /> : <SlidersHorizontal size={13} />}
+                            <span className="hidden sm:inline">Filter</span>
+                        </button>
                         <span className="text-xs font-bold text-[#999] uppercase tracking-wide shrink-0">
-                            {filtered.length} {filtered.length !== 1 ? 'products' : 'product'}
+                            {filtered.length}
                         </span>
                     </div>
 
-                    {/* Subcategory Pills — horizontal scroll on mobile */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-                        <SlidersHorizontal size={14} className="text-[#999] shrink-0" />
-                        {['All', ...category.subcategories].map((sub) => (
-                            <button
-                                key={sub}
-                                onClick={() => setActiveSubcat(sub)}
-                                className={`text-[11px] font-black uppercase tracking-wide px-3 py-1.5 border transition-colors shrink-0 ${activeSubcat === sub
-                                    ? 'bg-[#1A2B4A] text-white border-[#1A2B4A]'
-                                    : 'bg-white text-[#555] border-[#E0E0E0] hover:border-[#1A2B4A] hover:text-[#1A2B4A]'
+                    {/* Subcategory Pills — slide down when filter is open */}
+                    {filtersOpen && (
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none pt-2.5">
+                            {['All', ...category.subcategories].map((sub) => (
+                                <button
+                                    key={sub}
+                                    onClick={() => { setActiveSubcat(sub); setFiltersOpen(false); }}
+                                    className={`text-[11px] font-black uppercase tracking-wide px-3 py-1.5 border transition-colors shrink-0 ${
+                                        activeSubcat === sub
+                                            ? 'bg-[#1A2B4A] text-white border-[#1A2B4A]'
+                                            : 'bg-white text-[#555] border-[#E0E0E0] hover:border-[#1A2B4A] hover:text-[#1A2B4A]'
                                     }`}
-                            >
-                                {sub}
-                            </button>
-                        ))}
-                    </div>
+                                >
+                                    {sub}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

@@ -263,22 +263,22 @@ function AppInner() {
               className="lg:hidden bg-[#0F1F3A] overflow-hidden"
             >
               <nav className="flex flex-col px-4 py-4 gap-1">
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2 pt-2 pb-1">Machinery</p>
+                <p className="text-xs font-black uppercase tracking-widest text-white/50 px-2 pt-2 pb-1 border-l-2 border-[#2E6DB4] ml-0.5">Machinery</p>
                 {machineryCategories.map(cat => (
                   <button
                     key={cat.id}
                     onClick={() => { setActiveCategory(cat); setMobileMenuOpen(false); }}
-                    className="text-left font-bold uppercase text-sm tracking-wide text-white/80 hover:text-[#2E6DB4] transition-colors py-2 border-b border-white/5 px-2"
+                    className="text-left font-bold uppercase text-sm tracking-wide text-white/80 hover:text-[#2E6DB4] transition-colors py-2.5 border-b border-white/5 px-2"
                   >
                     {cat.name}
                   </button>
                 ))}
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2 pt-4 pb-1">Tooling</p>
+                <p className="text-xs font-black uppercase tracking-widest text-white/50 px-2 pt-4 pb-1 border-l-2 border-[#2E6DB4] ml-0.5">Tooling</p>
                 {toolingCategories.map(cat => (
                   <button
                     key={cat.id}
                     onClick={() => { setActiveCategory(cat); setMobileMenuOpen(false); }}
-                    className="text-left font-bold uppercase text-sm tracking-wide text-white/80 hover:text-[#2E6DB4] transition-colors py-2 border-b border-white/5 px-2"
+                    className="text-left font-bold uppercase text-sm tracking-wide text-white/80 hover:text-[#2E6DB4] transition-colors py-2.5 border-b border-white/5 px-2"
                   >
                     {cat.name}
                   </button>
@@ -330,7 +330,7 @@ function AppInner() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="text-white text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.88] tracking-tighter mb-4"
+            className="text-white text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.95] sm:leading-[0.88] tracking-tighter mb-4"
           >
             Your Partner In<br />
             <span className="text-[#2E6DB4]">Wood Manufacturing</span>
@@ -353,7 +353,7 @@ function AppInner() {
 
       {/* ── VALUE PROPS BAR ── */}
       <div className="bg-[#1A2B4A] text-white py-5 md:py-6 border-b-4 border-[#0F1F3A]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
           <div className="flex items-center gap-3">
             <Star size={28} strokeWidth={1.5} className="text-[#2E6DB4] shrink-0" />
             <div>
@@ -395,31 +395,31 @@ function AppInner() {
               Advanced Machinery Systems delivers everything your wood manufacturing operation needs to succeed.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               {
-                icon: <Settings2 size={40} strokeWidth={1.5} className="text-[#2E6DB4]" />,
+                icon: <Settings2 size={32} strokeWidth={1.5} className="text-[#2E6DB4]" />,
                 title: 'Machinery',
                 desc: 'Industrial CNC routers, edgebanders, panel saws, wide belt sanders, and more from the world\'s leading manufacturers.',
                 cta: 'Browse Machinery',
                 onClick: () => setActiveCategory(machineryCategories[0])
               },
               {
-                icon: <Wrench size={40} strokeWidth={1.5} className="text-[#2E6DB4]" />,
+                icon: <Wrench size={32} strokeWidth={1.5} className="text-[#2E6DB4]" />,
                 title: 'Tooling',
                 desc: 'Precision CNC router bits, edgebander tooling, saw blades, boring bits, and collets — in stock and ready to ship.',
                 cta: 'Shop Tooling',
                 onClick: () => setActiveCategory(toolingCategories[0])
               },
               {
-                icon: <HeadphonesIcon size={40} strokeWidth={1.5} className="text-[#2E6DB4]" />,
+                icon: <HeadphonesIcon size={32} strokeWidth={1.5} className="text-[#2E6DB4]" />,
                 title: 'Service',
                 desc: '6 specialist field service reps covering CNCs, edgebanders, sanders, and beam saws across the Intermountain West.',
                 cta: 'Our Service',
                 onClick: () => {}
               },
               {
-                icon: <GraduationCap size={40} strokeWidth={1.5} className="text-[#2E6DB4]" />,
+                icon: <GraduationCap size={32} strokeWidth={1.5} className="text-[#2E6DB4]" />,
                 title: 'Education',
                 desc: 'Workshops, training, and case studies designed to help your shop cut costs, increase throughput, and maximize profits.',
                 cta: 'Learn More',
@@ -431,16 +431,17 @@ function AppInner() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="bg-[#F7F8FA] border border-[#E8EAED] p-8 hover:border-[#2E6DB4] hover:shadow-lg transition-all group"
+                className="bg-[#F7F8FA] border border-[#E8EAED] p-4 sm:p-8 hover:border-[#2E6DB4] hover:shadow-lg transition-all group cursor-pointer"
+                onClick={s.onClick}
               >
-                <div className="mb-5">{s.icon}</div>
-                <h3 className="text-lg font-black uppercase tracking-tight text-[#1A1A1A] mb-3 group-hover:text-[#2E6DB4] transition-colors">{s.title}</h3>
-                <p className="text-sm text-[#666] leading-relaxed mb-6 font-medium">{s.desc}</p>
+                <div className="mb-3 sm:mb-5">{s.icon}</div>
+                <h3 className="text-sm sm:text-lg font-black uppercase tracking-tight text-[#1A1A1A] mb-2 sm:mb-3 group-hover:text-[#2E6DB4] transition-colors">{s.title}</h3>
+                <p className="hidden sm:block text-sm text-[#666] leading-relaxed mb-6 font-medium">{s.desc}</p>
                 <button
                   onClick={s.onClick}
-                  className="flex items-center gap-2 font-black uppercase text-xs tracking-widest text-[#2E6DB4] hover:gap-3 transition-all"
+                  className="flex items-center gap-1.5 sm:gap-2 font-black uppercase text-[10px] sm:text-xs tracking-widest text-[#2E6DB4] hover:gap-3 transition-all"
                 >
-                  {s.cta} <ArrowRight size={14} />
+                  {s.cta} <ArrowRight size={12} />
                 </button>
               </motion.div>
             ))}
@@ -549,16 +550,16 @@ function AppInner() {
             </p>
             <ul className="space-y-4 mb-10">
               {[
-                "Pod & Rail and Nested Base configurations",
-                "Full Homag software ecosystem integration",
-                "5-axis machining capability available",
-                "Backed by Advanced Machinery's 6 local field service reps",
+                { text: "Pod & Rail and Nested Base configurations", mobileHide: false },
+                { text: "Full Homag software ecosystem integration", mobileHide: false },
+                { text: "5-axis machining capability available", mobileHide: false },
+                { text: "Backed by Advanced Machinery's 6 local field service reps", mobileHide: true },
               ].map((feature, i) => (
-                <li key={i} className="flex items-start gap-3">
+                <li key={i} className={`flex items-start gap-3 ${feature.mobileHide ? 'hidden sm:flex' : ''}`}>
                   <div className="mt-1 bg-[#2E6DB4] text-white p-0.5">
                     <ChevronRight size={14} strokeWidth={4} />
                   </div>
-                  <span className="font-bold uppercase text-sm tracking-wide">{feature}</span>
+                  <span className="font-bold uppercase text-sm tracking-wide">{feature.text}</span>
                 </li>
               ))}
             </ul>
@@ -609,7 +610,7 @@ function AppInner() {
                     }}
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <h3 className="text-xl font-black uppercase mb-3 text-[#1A1A1A] group-hover:text-[#2E6DB4] transition-colors">{cat.name}</h3>
                   <ul className="space-y-1 mb-6">
                     {cat.subcategories.slice(0, 3).map((item, j) => (
@@ -746,7 +747,7 @@ function AppInner() {
       {/* ── FOOTER ── */}
       <footer className="bg-[#0F1F3A] text-white pt-12 md:pt-20 pb-10">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 mb-10 md:mb-16">
             <div>
               <div className="flex flex-col items-start mb-6">
                 <img src="/Advanced Machinery Logo.png" alt="Advanced Machinery Systems" className="h-10 w-auto" />

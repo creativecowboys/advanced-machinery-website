@@ -19,9 +19,7 @@ interface DisplayMessage {
 
 const PILLS = [
     { label: 'Find a CNC router', query: 'What CNC routers do you carry and who are they best for?' },
-    { label: 'CNC router bits', query: 'What CNC compression router bits do you stock?' },
-    { label: 'Edgebander tooling', query: 'I need edgebander tooling — what do you carry?' },
-    { label: 'SawStop table saws', query: 'Tell me about your SawStop table saw options' },
+    { label: 'Shop router bits', query: 'What CNC compression router bits do you stock?' },
     { label: 'Request service quote', query: 'I need service on my woodworking machinery — how do I get a quote?' },
 ];
 
@@ -277,13 +275,13 @@ export default function HeroChat({ initialQuery, onQueryConsumed }: HeroChatProp
                             initial={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="flex flex-wrap justify-center gap-2 mt-4"
+                            className="flex items-center gap-2 mt-4 overflow-x-auto scrollbar-none justify-center sm:justify-center"
                         >
                             {PILLS.map(pill => (
                                 <button
                                     key={pill.label}
                                     onClick={() => submitQuery(pill.query)}
-                                    className="text-[11px] font-bold text-white/70 border border-white/25 px-3.5 py-1.5 hover:bg-white/15 hover:text-white hover:border-white/50 transition-all backdrop-blur-sm"
+                                    className="shrink-0 text-xs font-bold text-white/75 border border-white/30 px-4 py-2 hover:bg-white/15 hover:text-white hover:border-white/55 transition-all backdrop-blur-sm"
                                 >
                                     {pill.label}
                                 </button>
@@ -353,9 +351,9 @@ export default function HeroChat({ initialQuery, onQueryConsumed }: HeroChatProp
                     )}
                 </AnimatePresence>
 
-                {/* Subtext when collapsed */}
+                {/* Subtext when collapsed — hidden on mobile to reduce clutter */}
                 {!expanded && (
-                    <p className="text-center text-white/40 text-xs font-medium mt-4 tracking-wide">
+                    <p className="hidden sm:block text-center text-white/40 text-xs font-medium mt-4 tracking-wide">
                         Powered by Advanced Machinery AI · Ask about machinery, tooling, or service
                     </p>
                 )}
